@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Базы данных</title>
+    <style>
+        body {
+            width: 100%;
+            margin: 0 auto;
+        }
+        .content {
+            padding-right: 220px; 
+        }
+        .review {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        .review h2 {
+            margin-top: 0;
+        }
+        .centered-form {
+            text-align: left;
+        }
+        .centered-form form {
+            display: inline-block;
+            text-align: left;
+            border-radius: 5px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+   
+        
+        <div id="reviews"></div>
+        <div class="centered-form">
+            <form id="registrationForm">
+                <label for="Ϭ0">Начальное напряжение ремня Ϭ0:</label>
+            <input type="number" id="Ϭ0" name="Ϭ0" required style="margin-left: 498px; border-radius: 5px;" min="0" step="0.1"><br><br>
+            
+            <label for="F">Окружная сила F:</label>
+            <input type="number" id="F" name="F" required style="margin-left: 607px; border-radius: 5px;" min="0"step="0.1"><br><br>
+            
+            <label for="δ1">Толщина ремня δ:</label>
+            <input type="number" id="δ1" name="δ1" required style="margin-left: 607px; border-radius: 5px;" min="0"step="0.1"><br><br>
+            
+            <label for="b">Ширина ремня b:</label>
+            <input type="number" id="b" name="b" required style="margin-left: 610px;border-radius: 5px;" min="0"step="0.1"><br><br>
+            
+            <label for="R">Материал ремня R:</label>
+            <select id="R" name="R" required style="margin-left: 270px;border-radius: 5px;">
+                <option value="Тканевые прорезиненные конечной длины (ОСТ 38.05.98 76)">Тканевые прорезиненные конечной длины (ОСТ 38.05.98 76)</option>
+                <option value="Синтетические капроновые с пленочным покрытием (МРТУ 17-645-68) Тип 1">Синтетические капроновые с пленочным покрытием (МРТУ 17-645-68) Тип 1</option>
+                <option value="Синтетические капроновые с пленочным покрытием (МРТУ 17-645-68) Тип 2">Синтетические капроновые с пленочным покрытием (МРТУ 17-645-68) Тип 2</option>
+            </select><br><br>                
+            
+            <label for="D1">Диаметр меньшего шкива D1:</label>
+            <input type="number" id="D1" name="D1" required style="margin-left: 525px;border-radius: 5px;" min="0"step="0.1"><br><br>
+            
+            <label for="Ϭи">Напряжения от цинтробежных сил Ϭи:</label>
+            <input type="number" id="Ϭи" name="Ϭи" required style="margin-left: 465px;border-radius: 5px;" min="0"step="0.1"><br><br>
+            
+            <label for="U">Тип скорости передачи U:</label>
+            <select id="U" name="U" required style="margin-left:  555px; border-radius: 5px;">
+                <option value="Быстроходная">Быстроходная</option>
+                <option value="Среднескоростная">Среднескоростная</option>
+            </select><br><br>                
+            
+            <label for="iч">Частота пробега ремня в секунду iч:</label>
+            <input type="number" id="iч" name="iч" required style="margin-left: 485px; border-radius: 5px;" min="0"step="0.1"><br><br>
+            
+            <label for="z">Число шкивов в передаче z:</label>
+            <input type="number" id="z" name="z" required style="margin-left: 543px; border-radius: 5px;" min="0"step="0.1"><br><br>
+            
+            <label for="ix">Число пробегов при данном режиме с напряжением Ϭ (x) ix:</label>
+            <input type="number" id="ix" name="ix" required style="margin-left: 320px; border-radius: 5px;" min="0"step="0.1"><br><br>
+            
+            <label for="lk">Коэффициент, указывающего какую часть общего времени ремень работает на данно режиме 1/e:</label>
+            <input type="number" id="lk" name="lk" required style="margin-left: 76px; border-radius: 5px;" min="0"step="0.1"><br><br>
+            
+            <label for="k">Общее число режимов с переменным напряжением Ϭ (x) k:</label>
+            <input type="number" id="k" name="k" required style="margin-left: 328px; border-radius: 5px;" min="0"step="0.1"><br><br>
+            
+            <label for="ip">Число пробегов при напряжении Ϭ (max) ip:</label>
+            <input type="number" id="ip" name="ip" required style="margin-left: 432px; border-radius: 5px;" min="0"step="0.1"><br><br>
+            
+            <label for="u1">Передаточное число u1:</label>
+            <input type="number" id="u1" name="u1" required style="margin-left: 571px; border-radius: 5px;" min="0"step="0.01"><br><br>
+            
+                <div style="text-align: right;">
+                    <input type="submit" value="Рассчитать">
+                </div>
+            </form>
+        </div>
+        <button id="clearTableBtn">Очистить таблицу</button>
+        <table id="resultTable"></table>
+   
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', async function (e) {
+            e.preventDefault(); 
+            const formData = new FormData(e.target);
+    
+            const materialMap = {
+                "Тканевые прорезиненные конечной длины (ОСТ 38.05.98 76)": 1,
+                "Синтетические капроновые с пленочным покрытием (МРТУ 17-645-68) Тип 1": 2,
+                "Синтетические капроновые с пленочным покрытием (МРТУ 17-645-68) Тип 2": 3
+            };
+    
+            const data = {
+                w: formData.get('Ϭ0'),
+                f: formData.get('F'),
+                q: formData.get('δ1'),
+                b: formData.get('b'),
+                r:  materialMap[formData.get('R')],
+                d1: formData.get('D1'),
+                y: formData.get('Ϭи'),
+                u: formData.get('U'),
+                iч: formData.get('iч'),
+                z: formData.get('z'),
+                ix: formData.get('ix'),
+                lk: formData.get('lk'),
+                k: formData.get('k'),
+                ip: formData.get('ip'),
+                u1: formData.get('u1')
+            };
+    
+            console.log(data);
+    
+            axios.post('http://localhost:8080/poat', data, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => { 
+                console.log("POST success:", response.data);
+                //displayData(response.data);
+    
+        
+                axios.get('http://localhost:8080/')
+                    .then(getResponse => {
+                        console.log("GET success:", getResponse.data);
+                        displayData(getResponse.data);
+                    })
+                    .catch(getError => {
+                        console.error("Error fetching data:", getError);
+                    });
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+            });
+        });
+        document.getElementById('clearTableBtn').addEventListener('click', function () {
+            axios.delete('http://localhost:8080/')
+                .then(response => {
+                    console.log("DELETE success:", response.data);
+                    displayData([]);
+                })
+                .catch(error => {
+                    console.error("Error deleting data:", error);
+                });
+        });
+        function displayData(data) {
+            const table = document.getElementById('resultTable');
+            table.innerHTML = ''; 
+    
+            if (Array.isArray(data)) {
+                if (data.length > 0) {
+                    const headerRow = table.insertRow();
+                    for (const key in data[0]) {
+                        const th = document.createElement('th');
+                        th.textContent = key;
+                        headerRow.appendChild(th);
+                    }
+    
+                    data.forEach(item => {
+                        const row = table.insertRow();
+                        for (const key in item) {
+                            const cell = row.insertCell();
+                            cell.textContent = item[key];
+                        }
+                    });
+                } else {
+                    console.log("Data array is empty.");
+                }
+            } else if (typeof data === 'object') {
+                const headerRow = table.insertRow();
+                const row = table.insertRow();
+    
+                for (const key in data) {
+                    const th = document.createElement('th');
+                    th.textContent = key;
+                    headerRow.appendChild(th);
+    
+                    const cell = row.insertCell();
+                    cell.textContent = data[key];
+                }
+            } else {
+                console.error("Invalid data format.");
+            }
+        }
+    </script>
+    
+    
+</body>
+</html>
